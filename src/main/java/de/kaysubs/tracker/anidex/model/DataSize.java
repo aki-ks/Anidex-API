@@ -10,17 +10,11 @@ public class DataSize {
     }
 
     public enum DataUnit {
-        BYTE(1, "B"), KILOBYTE(1000, "KB"), MEGABYTE(1000000, "MB"), GIGABYTE(1000000000, "GB"), TERABYTE(1000000000, "TB");
-        private final long factor;
+        BYTE("B"), KILOBYTE("KB"), MEGABYTE("MB"), GIGABYTE("GB"), TERABYTE("TB");
         private final String unitName;
 
-        DataUnit(long factor, String unitName) {
-            this.factor = factor;
+        DataUnit(String unitName) {
             this.unitName = unitName;
-        }
-
-        public long getFactor() {
-            return factor;
         }
 
         public String getUnitName() {
@@ -34,10 +28,6 @@ public class DataSize {
 
     public DataUnit getUnit() {
         return unit;
-    }
-
-    public long toBytes() {
-        return ammount * unit.getFactor();
     }
 
     @Override
