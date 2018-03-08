@@ -1,13 +1,13 @@
 # Anidex-API
 Java API implementation for https://anidex.info/
 
-This api uses the official upload api call and parses webpages to extract informations.
+This api uses the official upload api call and parses webpages to provide additional features.
 
 # Installation
 The recommended way to use this library is to add the github repository as a project in your build.sbt and let your project depend on it.
 Sbt builds the library from source and will apply all updates in the repository.
 ``` sbt
-lazy val pantsuCat = RootProject(uri("https://github.com/kaysubs/PantsuCat-API.git"))
+lazy val pantsuCat = RootProject(uri("https://github.com/kaysubs/Anidex-API.git"))
 dependsOn(pantsuCat)
 ```
 Of course you may also use a different build tool that support that feature or manually compile this library and its dependencies.
