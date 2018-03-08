@@ -7,8 +7,8 @@ This api uses the official upload api call and parses webpages to provide additi
 The recommended way to use this library is to add the github repository as a project in your build.sbt and let your project depend on it.
 Sbt builds the library from source and will apply all updates in the repository.
 ``` sbt
-lazy val pantsuCat = RootProject(uri("https://github.com/kaysubs/Anidex-API.git"))
-dependsOn(pantsuCat)
+lazy val anidex = RootProject(uri("https://github.com/kaysubs/Anidex-API.git"))
+dependsOn(anidex)
 ```
 Of course you may also use a different build tool that support that feature or manually compile this library and its dependencies.
 
@@ -35,4 +35,4 @@ System.out.println("'k subs has published " + (iter.getTotal()) + " torrents:");
 iter.forEachRemaining(torrent -> System.out.println(torrent.getName()));
 ```
 
-For more examples you may have a look at the `de.kaysubs.tracker.pantsucat.examples` package.
+For more examples you may have a look at the `de.kaysubs.tracker.anidex.examples` package.
