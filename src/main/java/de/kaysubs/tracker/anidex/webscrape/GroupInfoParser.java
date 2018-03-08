@@ -13,14 +13,6 @@ import java.util.Optional;
 
 public class GroupInfoParser implements Parser<GroupInfo> {
 
-    public static Document examplePage() throws IOException {
-        return Jsoup.parse(new java.io.File("/home/user/development/java/tracker/grouppage.html"), "UTF-8");
-    }
-
-    public static GroupInfo test() throws IOException {
-        return new GroupInfoParser().parsePage(examplePage());
-    }
-
     @Override
     public GroupInfo parsePage(Document page) {
         GroupInfo info = new GroupInfo();

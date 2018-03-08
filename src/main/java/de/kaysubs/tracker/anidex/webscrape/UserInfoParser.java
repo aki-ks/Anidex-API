@@ -15,11 +15,6 @@ import java.util.stream.Collectors;
 
 public class UserInfoParser implements Parser<UserInfo> {
 
-    public static Document test() throws IOException {
-        File f = new File("/home/user/development/java/tracker/user.html");
-        return Jsoup.parse(f, "UTF-8");
-    }
-
     @Override
     public UserInfo parsePage(Document page) {
         Element panel = page.selectFirst("div#content").selectFirst("div.panel.panel-default");

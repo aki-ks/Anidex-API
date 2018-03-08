@@ -13,14 +13,6 @@ import java.io.IOException;
 import java.util.Optional;
 
 public class AccountSettingsParser implements Parser<Setting> {
-    public static Document test() throws IOException {
-        File f = new File("/home/user/development/java/tracker/settings.html");
-        return Jsoup.parse(f, "UTF-8");
-    }
-
-    public static Setting testParse() throws IOException {
-        return new AccountSettingsParser().parsePage(test());
-    }
 
     @Override
     public Setting parsePage(Document page) {

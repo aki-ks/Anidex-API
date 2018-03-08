@@ -14,11 +14,6 @@ import java.util.Optional;
 
 public class TorrentInfoParser implements Parser<TorrentInfo> {
 
-    public static Document test() throws IOException {
-        File f = new File("/home/user/development/java/tracker/webpage.html");
-        return Jsoup.parse(f, "UTF-8");
-    }
-
     @Override
     public TorrentInfo parsePage(Document page) {
         TorrentInfo info = new TorrentInfo();
