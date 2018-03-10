@@ -7,7 +7,7 @@ public class TorrentInfo {
     private String name;
     private String description;
     private Uploader uploader;
-    private Language language;
+    private Optional<Language> language;
     private Category category;
     private int likes;
     private Comment[] comments;
@@ -144,11 +144,11 @@ public class TorrentInfo {
         this.uploader = uploader;
     }
 
-    public Language getLanguage() {
+    public Optional<Language> getLanguage() {
         return language;
     }
 
-    public void setLanguage(Language language) {
+    public void setLanguage(Optional<Language> language) {
         this.language = language;
     }
 

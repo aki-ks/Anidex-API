@@ -21,7 +21,7 @@ public class TorrentInfoExample {
         System.out.println("name: " + info.getName());
         System.out.println("uploader id: " + info.getUploader().getId());
         System.out.println("uploader name: " + info.getUploader().getName());
-        System.out.println("uploader language: " + info.getLanguage().getName());
+        System.out.println("uploader language: " + info.getLanguage());
         System.out.println("uploader category: " + info.getCategory());
         System.out.println("batch: " + info.isBatch());
         System.out.println("hentai: " + info.isHentai());

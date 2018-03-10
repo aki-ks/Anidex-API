@@ -97,8 +97,10 @@ public class ParseUtils {
         int categoryId = Integer.parseInt(categoryLink.substring(categoryLink.lastIndexOf("=") + 1));
         Category category = Category.fromId(categoryId);
 
-        String langName = rows[0].select("img").attr("title");
-        Language language = Language.fromName(langName);
+        Optional<Language> language = Optional.ofNullable(rows[0].selectFirst("img"))
+                .map(e -> e.attr("title"))
+                .filter(langName -> !langName.isEmpty())
+                .map(Language::fromName);
 
         boolean isAuthorized = rows[1].selectFirst("span[title=Authorised]") != null;
         boolean isTrusted = rows[1].selectFirst("span[title=Hidden]") != null;

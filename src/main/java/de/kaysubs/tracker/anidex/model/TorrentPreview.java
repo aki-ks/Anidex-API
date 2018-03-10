@@ -1,6 +1,7 @@
 package de.kaysubs.tracker.anidex.model;
 
 import java.util.Date;
+import java.util.Optional;
 
 /**
  * A TorrentInfo that contains less informations.
@@ -10,7 +11,7 @@ public class TorrentPreview {
     private final int id;
     private final String name;
     private final Category category;
-    private final Language language;
+    private final Optional<Language> language;
     private final TrustLevel trustLevel;
     private final boolean isHentai;
     private final boolean isRemake;
@@ -24,7 +25,7 @@ public class TorrentPreview {
     private final int completed;
     private final DataSize transferred;
 
-    public TorrentPreview(int id, String name, Category category, Language language, TrustLevel trustLevel, boolean isHentai,
+    public TorrentPreview(int id, String name, Category category, Optional<Language> language, TrustLevel trustLevel, boolean isHentai,
                           boolean isRemake, boolean isBatch, int likes, int commentCount, DataSize size, Date uploadDate,
                           int seeders, int leechers, int completed, DataSize transferred) {
         this.id = id;
@@ -57,7 +58,7 @@ public class TorrentPreview {
         return name;
     }
 
-    public Language getLanguage() {
+    public Optional<Language> getLanguage() {
         return language;
     }
 

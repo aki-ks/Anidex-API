@@ -83,8 +83,9 @@ public class TorrentInfoParser implements Parser<TorrentInfo> {
         info.setName(nameRow.selectFirst("input").attr("value"));
 
         Element langRow = ParseUtils.findRow(rows, "Language:");
-        int langId = Integer.parseInt(langRow.selectFirst("option[selected]").attr("value"));
-        info.setLanguage(Language.fromId(langId));
+        info.setLanguage(Optional.ofNullable(langRow.selectFirst("option[selected]"))
+                .map(e -> Integer.parseInt(e.attr("value")))
+                .map(langId -> Language.fromId(langId)));
 
         Element categoryRow = ParseUtils.findRow(rows, "Category:");
         int categoryId = Integer.parseInt(categoryRow.selectFirst("option[selected]").attr("value"));
