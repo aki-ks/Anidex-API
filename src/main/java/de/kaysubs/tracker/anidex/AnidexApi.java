@@ -54,6 +54,7 @@ public interface AnidexApi {
      *
      * Since this api call is based on parsing webpages, it might break anytime.
      *
+     * @throws NoSuchUserException the user does not exist
      * @throws WebScrapeException error while parsing webpage
      * @throws HttpException networking error
      */

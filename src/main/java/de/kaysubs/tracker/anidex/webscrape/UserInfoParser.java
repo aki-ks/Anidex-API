@@ -1,5 +1,6 @@
 package de.kaysubs.tracker.anidex.webscrape;
 
+import de.kaysubs.tracker.anidex.exception.NoSuchUserException;
 import de.kaysubs.tracker.anidex.exception.WebScrapeException;
 import de.kaysubs.tracker.anidex.model.*;
 import de.kaysubs.tracker.anidex.utils.ConversionUtils;
@@ -19,6 +20,11 @@ public class UserInfoParser implements Parser<UserInfo> {
     @Override
     public UserInfo parsePage(Document page) {
         Element panel = page.selectFirst("div#content").selectFirst("div.panel.panel-default");
+
+        page.select("div.alert-danger").stream()
+                .filter(e -> e.textNodes().stream()
+                        .anyMatch(n -> n.text().contains("does not exist.")))
+                .forEach(e -> { throw new NoSuchUserException(); });
 
         Element titleLine = panel.selectFirst("h3.panel-title");
         String name = titleLine.textNodes().get(0).text().trim();
