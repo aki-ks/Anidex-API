@@ -5,6 +5,8 @@ import de.kaysubs.tracker.anidex.exception.WebScrapeException;
 import de.kaysubs.tracker.anidex.model.*;
 import de.kaysubs.tracker.common.exception.HttpException;
 
+import java.util.function.Function;
+
 /**
  * Api calls that require a authentication.
  * Use {@link AnidexApi#login(String, String)} to get an instance of this interface.
@@ -24,9 +26,16 @@ public interface AnidexAuthApi extends AnidexApi {
     /**
      * Set profile settings.
      *
-     * A common usage is to get the current
-     * settings values, then turn it into a request
-     * and update the values you want to change.
+     * A common usage is to get the current settings values,
+     * then turn it into a request and update the values you want to change.
+     * If you do only want to change one settings category,
+     * the update methods are the better/prettier choice.
+     * Otherwise the above way is recommended since the
+     * current settings must only be fetched once.
+     *
+     * @see AnidexAuthApi#updateFilterSetting(Function)
+     * @see AnidexAuthApi#updateProfileSetting(Function)
+     * @see AnidexAuthApi#updateUploadSetting(Function)
      *
      * @see SetFilterSettingRequest
      * @see SetProfileSettingRequest
@@ -114,4 +123,30 @@ public interface AnidexAuthApi extends AnidexApi {
      */
     Communication getCommunication(int communicationId);
 
+    /**
+     * Prettier syntax for updating the current filter settings
+     */
+    default void updateFilterSetting(Function<SetFilterSettingRequest, SetFilterSettingRequest> f) {
+        SetFilterSettingRequest request = getAccountSettings().getFilterSetting().toRequest();
+        request = f.apply(request);
+        setAccountSettings(request);
+    }
+
+    /**
+     * Prettier syntax for updating the current profile settings
+     */
+    default void updateProfileSetting(Function<SetProfileSettingRequest, SetProfileSettingRequest> f) {
+        SetProfileSettingRequest request = getAccountSettings().getProfileSetting().toRequest();
+        request = f.apply(request);
+        setAccountSettings(request);
+    }
+
+    /**
+     * Prettier syntax for updating the current upload settings
+     */
+    default void updateUploadSetting(Function<SetUploadSettingRequest, SetUploadSettingRequest> f) {
+        SetUploadSettingRequest request = getAccountSettings().getUploadSettings().toRequest();
+        request = f.apply(request);
+        setAccountSettings(request);
+    }
 }
