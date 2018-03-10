@@ -81,14 +81,11 @@ public class ConversionUtils {
     }
 
     private static DataSize.DataUnit parseDataUnit(String unitName) {
-        switch (unitName.toUpperCase().trim()) {
-            case "B": return DataSize.DataUnit.BYTE;
-            case "KB": return DataSize.DataUnit.KILOBYTE;
-            case "MB": return DataSize.DataUnit.MEGABYTE;
-            case "GB": return DataSize.DataUnit.GIGABYTE;
-            case "TB": return DataSize.DataUnit.TERABYTE;
-            default: throw new WebScrapeException("Cannot parse unit " + unitName);
-        }
+        for(DataSize.DataUnit unit : DataSize.DataUnit.values())
+            if(unit.getUnitName().equals(unitName))
+                return unit;
+
+        throw new WebScrapeException("Cannot parse unit " + unitName);
     }
 
 }

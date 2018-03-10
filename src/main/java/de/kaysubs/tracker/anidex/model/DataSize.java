@@ -10,7 +10,7 @@ public class DataSize {
     }
 
     public enum DataUnit {
-        BYTE("B"), KILOBYTE("KB"), MEGABYTE("MB"), GIGABYTE("GB"), TERABYTE("TB");
+        BYTE("B"), KILOBYTE("KB"), MEGABYTE("MB"), GIGABYTE("GB"), TERABYTE("TB"), PETABYTE("PB");
         private final String unitName;
 
         DataUnit(String unitName) {
