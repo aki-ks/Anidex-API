@@ -20,6 +20,7 @@ public class TorrentPreview {
     private final int commentCount;
     private final DataSize size;
     private final Date uploadDate;
+    private final boolean needsReseed;
     private final int seeders;
     private final int leechers;
     private final int completed;
@@ -27,7 +28,7 @@ public class TorrentPreview {
 
     public TorrentPreview(int id, String name, Category category, Optional<Language> language, TrustLevel trustLevel, boolean isHentai,
                           boolean isRemake, boolean isBatch, int likes, int commentCount, DataSize size, Date uploadDate,
-                          int seeders, int leechers, int completed, DataSize transferred) {
+                          boolean needsReseed, int seeders, int leechers, int completed, DataSize transferred) {
         this.id = id;
         this.name = name;
         this.category = category;
@@ -40,6 +41,7 @@ public class TorrentPreview {
         this.commentCount = commentCount;
         this.size = size;
         this.uploadDate = uploadDate;
+        this.needsReseed = needsReseed;
         this.seeders = seeders;
         this.leechers = leechers;
         this.completed = completed;
@@ -92,6 +94,10 @@ public class TorrentPreview {
 
     public Date getUploadDate() {
         return uploadDate;
+    }
+
+    public boolean isReseedNeeded() {
+        return needsReseed;
     }
 
     public int getSeeders() {

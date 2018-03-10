@@ -124,13 +124,15 @@ public class ParseUtils {
         DataSize size = ConversionUtils.parseDataSize(rows[6].text());
         Date uploadDate = ConversionUtils.parseDate(rows[7].attr("title"));
 
+        boolean needsReseed = rows[8].selectFirst("span.fa-exclamation-triangle") != null;
+
         int seeders = Integer.parseInt(rows[8].text());
         int leechers = Integer.parseInt(rows[9].text());
         int completed = Integer.parseInt(rows[10].text());
         DataSize transferred = ConversionUtils.parseDataSize(rows[10].attr("title"));
 
         return new TorrentPreview(torrentId, name, category, language, trustLevel, isHentai, isRemake, isBatch,
-                likes, commentCount, size, uploadDate, seeders, leechers, completed, transferred);
+                likes, commentCount, size, uploadDate, needsReseed, seeders, leechers, completed, transferred);
     }
 
 }
