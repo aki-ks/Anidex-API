@@ -1,5 +1,6 @@
 package de.kaysubs.tracker.anidex.webscrape;
 
+import de.kaysubs.tracker.anidex.exception.WebScrapeException;
 import de.kaysubs.tracker.anidex.model.*;
 import de.kaysubs.tracker.anidex.utils.ConversionUtils;
 import org.jsoup.Jsoup;
@@ -28,10 +29,10 @@ public class UserInfoParser implements Parser<UserInfo> {
         Optional<String> avatarUrl = Optional.ofNullable(panel.selectFirst("img[title=User Logo]"))
                 .map(e -> e.attr("src"));
 
-        String userLevel = panel.select("td").stream()
+        UserInfo.UserLevel userLevel = parseUserLevel(panel.select("td").stream()
                 .filter(e -> e.children().stream().anyMatch(x -> x.is("span.fa-graduation-cap")))
                 .findAny().get()
-                .selectFirst("span:not(.fa-graduation-cap)").text();
+                .selectFirst("span:not(.fa-graduation-cap)").text());
 
         Elements rows = panel.selectFirst("table").selectFirst("tbody").select("tr");
 
@@ -59,5 +60,16 @@ public class UserInfoParser implements Parser<UserInfo> {
 
         return new UserInfo(name, language, avatarUrl, userLevel, joinDate,
                 lastOnline, groups, seeders, leechers, completed, transferred);
+    }
+
+    private UserInfo.UserLevel parseUserLevel(String level) {
+        switch(level) {
+            case "Member": return UserInfo.UserLevel.DEFAULT;
+            case "Validating": return UserInfo.UserLevel.VALIDATING;
+            case "Group Leader": return UserInfo.UserLevel.GROUP_LEADER;
+            case "Trusted Member": return UserInfo.UserLevel.TRUSTED;
+            case "Administrator" : return UserInfo.UserLevel.ADMINISTRATOR;
+            default: throw new WebScrapeException("Unknown use level \"" + level + "\"");
+        }
     }
 }

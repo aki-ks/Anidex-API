@@ -6,7 +6,7 @@ public class UserInfo {
     private final String name;
     private final Language language;
     private final Optional<String> avatarUrl;
-    private final String userLevel;
+    private final UserLevel userLevel;
     private final Day joinDate;
     private final Time lastOnline;
     private final Group[] groups;
@@ -15,7 +15,7 @@ public class UserInfo {
     private final int completed;
     private final DataSize transferred;
 
-    public UserInfo(String name, Language language, Optional<String> avatarUrl, String userLevel, Day joinDate, Time lastOnline,
+    public UserInfo(String name, Language language, Optional<String> avatarUrl, UserLevel userLevel, Day joinDate, Time lastOnline,
                     Group[] groups, int seeders, int leechers, int completed, DataSize transferred) {
         this.name = name;
         this.language = language;
@@ -30,6 +30,13 @@ public class UserInfo {
         this.transferred = transferred;
     }
 
+    public enum UserLevel {
+        DEFAULT,
+        VALIDATING,
+        GROUP_LEADER,
+        TRUSTED,
+        ADMINISTRATOR
+    }
 
     public static class Group {
         private final int id;
@@ -57,7 +64,7 @@ public class UserInfo {
         return language;
     }
 
-    public String getUserLevel() {
+    public UserLevel getUserLevel() {
         return userLevel;
     }
 
