@@ -5,7 +5,7 @@ import de.kaysubs.tracker.anidex.exception.WebScrapeException;
 import de.kaysubs.tracker.anidex.model.*;
 import de.kaysubs.tracker.common.exception.HttpException;
 
-import java.util.function.Function;
+import java.util.function.Consumer;
 
 /**
  * Api calls that require a authentication.
@@ -33,9 +33,9 @@ public interface AnidexAuthApi extends AnidexApi {
      * Otherwise the above way is recommended since the
      * current settings must only be fetched once.
      *
-     * @see AnidexAuthApi#updateFilterSetting(Function)
-     * @see AnidexAuthApi#updateProfileSetting(Function)
-     * @see AnidexAuthApi#updateUploadSetting(Function)
+     * @see AnidexAuthApi#updateFilterSetting(Consumer)
+     * @see AnidexAuthApi#updateProfileSetting(Consumer)
+     * @see AnidexAuthApi#updateUploadSetting(Consumer)
      *
      * @see SetFilterSettingRequest
      * @see SetProfileSettingRequest
@@ -126,27 +126,27 @@ public interface AnidexAuthApi extends AnidexApi {
     /**
      * Prettier syntax for updating the current filter settings
      */
-    default void updateFilterSetting(Function<SetFilterSettingRequest, SetFilterSettingRequest> f) {
+    default void updateFilterSetting(Consumer<SetFilterSettingRequest> f) {
         SetFilterSettingRequest request = getAccountSettings().getFilterSetting().toRequest();
-        request = f.apply(request);
+        f.accept(request);
         setAccountSettings(request);
     }
 
     /**
      * Prettier syntax for updating the current profile settings
      */
-    default void updateProfileSetting(Function<SetProfileSettingRequest, SetProfileSettingRequest> f) {
+    default void updateProfileSetting(Consumer<SetProfileSettingRequest> f) {
         SetProfileSettingRequest request = getAccountSettings().getProfileSetting().toRequest();
-        request = f.apply(request);
+        f.accept(request);
         setAccountSettings(request);
     }
 
     /**
      * Prettier syntax for updating the current upload settings
      */
-    default void updateUploadSetting(Function<SetUploadSettingRequest, SetUploadSettingRequest> f) {
+    default void updateUploadSetting(Consumer<SetUploadSettingRequest> f) {
         SetUploadSettingRequest request = getAccountSettings().getUploadSettings().toRequest();
-        request = f.apply(request);
+        f.accept(request);
         setAccountSettings(request);
     }
 }
