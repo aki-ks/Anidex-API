@@ -4,13 +4,15 @@ Java API implementation for https://anidex.info/
 This api uses the official upload api call and parses webpages to provide additional features.
 
 # Installation
-The recommended way to use this library is to add the github repository as a project in your build.sbt and let your project depend on it.
-Sbt builds the library from source and will apply all updates in the repository.
+One way to use this library is to inculde it through jitpack.
+How to use it with your build tool is explained at [their page](https://jitpack.io/#aki-ks/Anidex-API).
+
+If you're building with sbt, you may add this library as a remote project in your `build.sbt` and let your project depend on it.
+Sbt builds the library from source and will apply all new commits to the repository.
 ``` sbt
 lazy val anidex = RootProject(uri("https://github.com/kaysubs/Anidex-API.git"))
 dependsOn(anidex)
 ```
-Of course you may also use a different build tool that support that feature or manually compile this library and its dependencies.
 
 # Usage
 The entry point of this API are the `AnidexApi` and `AnidexAuthApi` interface.
